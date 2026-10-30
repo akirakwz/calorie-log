@@ -1,0 +1,8 @@
+// Worker の入口。機能はまだ無く、開発環境の動作確認用の口だけ置いている。
+import { Hono } from "hono";
+
+const app = new Hono<{ Bindings: Env }>().basePath("/api");
+
+app.get("/health", (c) => c.json({ ok: true }));
+
+export default app satisfies ExportedHandler<Env>;

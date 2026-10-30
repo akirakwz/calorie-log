@@ -1,0 +1,30 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "calorie-log",
+  "main": "./src/worker/index.ts",
+  "compatibility_date": "2026-10-01",
+  // Cloudflare Access で守るので、自動で付く別の URL は使わない
+  "workers_dev": false,
+  "preview_urls": false,
+  "assets": {
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/api/*"]
+  },
+  "observability": { "enabled": true },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "calorie-log",
+      // 河津さんが `wrangler d1 create calorie-log` で作った ID に差し替える
+      "database_id": "00000000-0000-0000-0000-000000000000",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "BUCKET",
+      // 河津さんが作ったバケット名に差し替える
+      "bucket_name": "calorie-log-images"
+    }
+  ]
+}
